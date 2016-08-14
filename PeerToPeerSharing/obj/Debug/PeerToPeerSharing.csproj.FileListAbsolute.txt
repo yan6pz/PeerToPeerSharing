@@ -1,0 +1,5 @@
+c:\users\yanis\documents\visual studio 2015\Projects\PeerToPeerSharing\PeerToPeerSharing\bin\Debug\PeerToPeerSharing.dll
+c:\users\yanis\documents\visual studio 2015\Projects\PeerToPeerSharing\PeerToPeerSharing\bin\Debug\PeerToPeerSharing.pdb
+c:\users\yanis\documents\visual studio 2015\Projects\PeerToPeerSharing\PeerToPeerSharing\obj\Debug\PeerToPeerSharing.csprojResolveAssemblyReference.cache
+c:\users\yanis\documents\visual studio 2015\Projects\PeerToPeerSharing\PeerToPeerSharing\obj\Debug\PeerToPeerSharing.dll
+c:\users\yanis\documents\visual studio 2015\Projects\PeerToPeerSharing\PeerToPeerSharing\obj\Debug\PeerToPeerSharing.pdb

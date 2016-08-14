@@ -1,0 +1,1 @@
+Basic peer to peer functionality for file transfer.The app will use Tcp for communication.

@@ -37,14 +37,12 @@ namespace PeerToPeerSharing
         }
 
 
-        public async void ConnectPeer(string ipAddress, int port)
+        public async void ConnectPeer( int port)
         {
-            IPAddress address = IPAddress.Parse(ipAddress);
-
 
             try
             {
-                await Client.ConnectAsync(address, port);
+                await Client.ConnectAsync(IPAddress.Any, port);
                 Connect();
             }
             catch

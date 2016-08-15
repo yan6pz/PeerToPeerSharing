@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,19 +15,20 @@ namespace PeerToPeerSharing
         private TcpListener Listener { get; set; }
         private TcpClient TcpClient { get; set; }
 
-        public async void Start(string address,int port)
+        public async void Start()
         {
-            await Task.Run(()=>FindPeers(address,port));
+            await Task.Run(()=>FindPeers());
         }
 
-        private void FindPeers(string address, int port)
+        private void FindPeers()
         {
-            AddNewConnection(address, port);
+            AddNewConnection();
         }
 
         private NetworkStream NStream { get; set; }
         private Torrent CurrentTorrent { get; set; }
         public string FileName { get; private set; }
+        public int Port { get; set; }
 
         public ConcurrentDictionary<string, Peer> Peers = new ConcurrentDictionary<string, Peer>();
 
@@ -37,15 +39,17 @@ namespace PeerToPeerSharing
 
         public  ClientListener(int port)
         {
-            this.Listener= TcpListener.Create(port);
+            this.Port = port;
+            this.Listener=new TcpListener(new IPEndPoint(IPAddress.Any, port));
             this.Listener.Start();
             InstantiateTcpClient();
             this.NStream = this.TcpClient.GetStream();
         }
 
-        private async void InstantiateTcpClient()
+        private void InstantiateTcpClient()
         {
-            TcpClient client = await this.Listener.AcceptTcpClientAsync();
+            this.TcpClient=  this.Listener.AcceptTcpClient();
+            Console.WriteLine("{0}: Tcp Client is now listening",DateTime.Now);
         }
 
         public async void GetFileInfo()
@@ -84,11 +88,11 @@ namespace PeerToPeerSharing
             }
         }
 
-        private void AddNewConnection(string address,int port)
+        private void AddNewConnection()
         {
             InstantiateTcpClient();
 
-            new Peer().ConnectPeer(address,port);
+            new Peer().ConnectPeer(this.Port);
         }
 
 
